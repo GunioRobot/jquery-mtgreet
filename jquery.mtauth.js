@@ -12,8 +12,8 @@ jQuery.extend({ authchangeList: [], authHappened: false, needsAuth: false });
     $.fn.onauthchange.fire = function() {
       jQuery.authHappened = true;
       jQuery.needsAuth = false;
-      jQuery.each( jQuery.authchangeList, function() { 
-	  $(this).trigger('onauthchange',$.fn.movabletype.user); 
+      jQuery.each( jQuery.authchangeList, function() {
+	  $(this).trigger('onauthchange',$.fn.movabletype.user);
       });
     };
     $.fn.movabletype = function() {
@@ -75,11 +75,11 @@ jQuery.extend({ authchangeList: [], authHappened: false, needsAuth: false });
 	return $.fn.movabletype.user;
       };
       $.fn.movabletype.fetchUser = function(cb) {
-	if (!cb) { 
-          cb = function(u) { 
-            return $.fn.movabletype.setUser(u); 
-          } 
-        }; 
+	if (!cb) {
+          cb = function(u) {
+            return $.fn.movabletype.setUser(u);
+          }
+        };
 	if ( $.fn.movabletype.getUser() && $.fn.movabletype.getUser().is_authenticated && $.fn.movabletype.getUser().sid) {
 	  // user is logged into current domain...
 	  var url = document.URL;
@@ -93,8 +93,8 @@ jQuery.extend({ authchangeList: [], authHappened: false, needsAuth: false });
 	  mtFetchedUser = true;
 	  var url = mt.blog.comments.script + '?__mode=session_js&blog_id=' + mt.blog.id + '&jsonp=?';
 	  // this is asynchronous, so it will return prior to the user being saved
-	  $.getJSON(url,function(data) { 
-	      cb(data) 
+	  $.getJSON(url,function(data) {
+	      cb(data)
           });
 	}
       };
@@ -127,17 +127,17 @@ jQuery.extend({ authchangeList: [], authHappened: false, needsAuth: false });
 	  if (f.url != undefined) u.url = f.url.value;
 	}
 	if (!u) return;
-	
+
 	var cache_period = mt.cookie.timeout * 1000;
 	// cache anonymous user info for a long period if the
 	// user has requested to be remembered
 	if (u.is_anonymous && f && f.bakecookie && f.bakecookie.checked)
 	  cache_period = 365 * 24 * 60 * 60 * 1000;
-	
+
 	var now = new Date();
 	_fixDate(now);
 	now.setTime(now.getTime() + cache_period);
-	
+
 	var cmtcookie = _bakeUserCookie(u);
 	_setCookie(cmtcookie,now);
       };
@@ -184,7 +184,7 @@ jQuery.extend({ authchangeList: [], authHappened: false, needsAuth: false });
 	    (secure ? "; secure" : "") +
 	    "; expires=Thu, 01-Jan-70 00:00:01 GMT";
 	  document.cookie = curCookie;
-	}	
+	}
       };
       $.fn.movabletype.clearUser = function() {
 	this.user = null;
@@ -205,8 +205,8 @@ jQuery.extend({ authchangeList: [], authHappened: false, needsAuth: false });
 		$.fn.movabletype.clearUser();
 		window.location.hash.match( /^#_log(in|out)/ );
 		if (RegExp.$1 == 'in') {
-		  $.fn.movabletype.fetchUser(function(u) { 
-		      $.fn.movabletype.setUser(u); 
+		  $.fn.movabletype.fetchUser(function(u) {
+		      $.fn.movabletype.setUser(u);
 		      var url = document.URL;
 		      url = url.replace(/#.+$/, '');
 		      url += '#loggedin';
@@ -218,7 +218,7 @@ jQuery.extend({ authchangeList: [], authHappened: false, needsAuth: false });
 		  url = url.replace(/#.+$/, '');
 		  url += '#loggedout';
 		  location.href = url;
-		} 
+		}
 	      } else {
                 $.fn.onauthchange.fire();
 		/***

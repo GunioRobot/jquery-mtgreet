@@ -26,7 +26,7 @@
             greetingContainerTag:  'div',
             isPreview:           false,
             ajaxLogin:           true,
-	        returnToURL: null, 
+	        returnToURL: null,
 	        /* Events and Callbacks */
 	        onSignInClick:  function(e){ return signInClickHandler( $(e) ); },
 	        onSignOutClick: function(e){ return signOutClickHandler( $(e) ); },
@@ -38,15 +38,15 @@
 	        obj = $(this);
 	        self = obj;
 	        if (jQuery.needsAuth) {
-	            $(this).onauthchange( function(e, u) { 
-		            _insertText( $(this) ); 
+	            $(this).onauthchange( function(e, u) {
+		            _insertText( $(this) );
                 });
 	        } else {
 	            _insertText( $(this) );
 	            $(this).onauthchange( function() { _insertText( obj ); return false; });
 	        }
-	    });	
-        
+	    });
+
 	    function _insertText(obj) {
 	        var phrase = compileGreetingText();
 	        obj.empty().append( jQuery("<" + settings.greetingContainerTag  +">" + phrase + "</" + settings.greetingContainerTag  +">") );
@@ -88,7 +88,7 @@
 		            url += 'return_url=' + settings.returnToURL;
 	            }
 	        } else {
-	            if (settings.returnToURL) { 
+	            if (settings.returnToURL) {
 		            url += 'return_url=' + settings.returnToURL;
 	            } else {
 		            url += 'return_url=' + encodeURIComponent(doc_url);
@@ -170,7 +170,7 @@
 		            phrase = settings.loggedInMessage;
 		        }
 	        } else {
-		        // TODO - this obviously does that same thing. 
+		        // TODO - this obviously does that same thing.
 		        if (mt.blog.registration.required) {
 		            phrase = settings.loggedOutMessage;
 		        } else {
